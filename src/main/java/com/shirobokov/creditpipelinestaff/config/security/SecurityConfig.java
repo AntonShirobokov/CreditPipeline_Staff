@@ -9,6 +9,8 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -16,24 +18,27 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
 
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//
-//    }
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+       http
+               .formLogin(formLogin -> formLogin.loginPage("/login")
+                       .defaultSuccessUrl("/applications")
+                       .permitAll())
+               .logout(logout -> logout.logoutUrl("/logout"))
+               .authorizeHttpRequests(authorizeRequests ->
+                       authorizeRequests
+                               .requestMatchers("/api/receivedApplication").permitAll()
+                               .requestMatchers("/registration").hasRole("ADMIN")
+                               .requestMatchers("/error").permitAll()
+                               .requestMatchers("/css/*.css").permitAll()
+                               .requestMatchers("/js/*.js").permitAll()
+                               .anyRequest().hasAnyRole("EMPLOYEE", "ADMIN"));
 
-//    @Bean
-//    public AuthenticationManager authenticationManager(EmployeeService employeeService) {
-//        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-//        authenticationProvider.setUserDetailsService(userDetailsService(employeeService));
-//        authenticationProvider.setPasswordEncoder();
-//
-//        ProviderManager providerManager = new ProviderManager(authenticationProvider);
-//        providerManager.setEraseCredentialsAfterAuthentication(false);
-//
-//        return providerManager;
-//    }
+       return http.build();
+    }
 
-
-
-
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 }

@@ -4,10 +4,16 @@ spring:
     url: jdbc:postgresql://localhost:5432/CreditPipeline
     username: postgres
     password: postgres
-
+  sql:
+    init:
+      mode: never
 
 management:
   endpoints:
     web:
       exposure:
         include: beans
+server:
+  port: 8081
+
+

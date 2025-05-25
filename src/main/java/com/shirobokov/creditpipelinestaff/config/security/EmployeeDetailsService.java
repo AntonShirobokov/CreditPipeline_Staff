@@ -23,6 +23,8 @@ public class EmployeeDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<Employee> employee = employeeRepository.findByUsername(username);
 
+        System.out.println("На этапе входа в аккаунт: " + employee.get().getRole());
+
         if (employee.isPresent()) {
             return new EmployeeDetails(employee.get());
         }
