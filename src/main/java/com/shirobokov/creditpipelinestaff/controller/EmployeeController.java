@@ -11,15 +11,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class EmployeeController {
 
 
-    @GetMapping("/applications")
-    public String applications(Model model) {
-        return "applications";
+    @GetMapping("/evaluate")
+    public String evaluate(Model model) {
+        return "evaluate";
     }
 
-    @GetMapping("/test")
-    public String test(Model model) {
-        System.out.println(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
-        return "applications";
+    @GetMapping("/rules")
+    public String rules(Model model) {
+        return "rules";
+    }
+
+    @GetMapping("/history")
+    public String history(Model model) {
+        return "history";
     }
 
 }

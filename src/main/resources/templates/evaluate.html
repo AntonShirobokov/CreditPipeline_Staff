@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Оценка заявок</title>
+    <link rel="stylesheet" href="/css/evaluate.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <script src="/js/evaluate.js"></script>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+</head>`
+<body>
+<div class="sidebar">
+    <a href="/evaluate">Оценка заявок</a>
+    <a href="/rules">Добавление правил</a>
+    <a href="/history">История заявок</a>
+</div>
+<div class="main-content">
+    <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+    <h2>Оценка заявок</h2>
+    <p>Здесь можно одобрить или отклонить заявки.</p>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,213 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', 'Roboto', sans-serif;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    background: #f4f7fa;
+    font-size: 16px;
+    color: #2b2b2b;
+}
+
+/* Сайдбар */
+.sidebar {
+    width: 250px;
+    background: #202c3f;
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar a {
+    color: #fff;
+    padding: 15px 20px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+.sidebar a:hover {
+    background: #2c3d57;
+}
+
+/* Контент */
+.main-content {
+    flex: 1;
+    padding: 30px;
+    background: #ffffff;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.03);
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #1a1a1a;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.card {
+    background: #fdfefe;
+    border-left: 6px solid #78a5ff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    transition: transform 0.2s, background-color 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.01);
+    background-color: #f2f6fa;
+}
+
+.card p {
+    margin-bottom: 8px;
+}
+
+/* Кнопки */
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+    margin-right: 10px;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+button:hover {
+    transform: scale(1.03);
+}
+
+/* Кнопка одобрить - Зелёная */
+button.approve {
+    background-color: #28a745;
+    color: white;
+}
+
+button.approve:hover {
+    background-color: #218838;
+}
+
+/* Кнопка отклонить - Красная */
+button.danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+button.danger:hover {
+    background-color: #c82333;
+}
+
+/* Кнопка подробности - Синяя */
+button.details-btn {
+    background-color: #007bff;
+    color: white;
+}
+
+button.details-btn:hover {
+    background-color: #0069d9;
+}
+
+/* Блок подробностей */
+.details {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f7f9fb;
+    border-radius: 10px;
+    border: 1px solid #dce5f1;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.details table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.details table th,
+.details table td {
+    padding: 10px 14px;
+    border: 1px solid #e0e6ef;
+    text-align: left;
+    font-size: 15px;
+}
+
+.details table th {
+    background-color: #f0f4f8;
+    color: #2e3d4e;
+    font-weight: 600;
+}
+
+.details table tr:nth-child(even) {
+    background-color: #fbfdff;
+}
+
+.details caption {
+    caption-side: top;
+    font-size: 18px;
+    color: #2f3e53;
+    font-weight: 600;
+    padding-bottom: 8px;
+}
+
+
+.details-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.details-table td,
+.details-table th {
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #e0e6ef;
+    vertical-align: top;
+    word-wrap: break-word;
+}
+
+.details-table caption {
+    caption-side: top;
+    font-size: 18px;
+    color: #2f3e53;
+    font-weight: 600;
+    padding: 10px;
+    text-align: left;
+}
+
+
+
+
+.input-field {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    padding: 8px;
+    border: 1px solid #cdd5df;
+    border-radius: 6px;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.submit-approve,
+.submit-reject {
+    background-color: #4caf50; /* зелёная по умолчанию */
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.reject-form .submit-reject {
+    background-color: #f44336; /* красная */
+}
