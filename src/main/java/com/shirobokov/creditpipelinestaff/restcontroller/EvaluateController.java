@@ -8,6 +8,7 @@ import com.shirobokov.creditpipelinestaff.entity.Employee;
 import com.shirobokov.creditpipelinestaff.mapper.ApplicationMapper;
 import com.shirobokov.creditpipelinestaff.service.ApplicationService;
 import com.shirobokov.creditpipelinestaff.service.EmployeeService;
+import com.shirobokov.creditpipelinestaff.service.NotificationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -24,11 +25,15 @@ public class EvaluateController {
 
     private final EmployeeService employeeService;
 
+    private final NotificationService notificationService;
+
     private final ApplicationMapper applicationMapper;
 
-    public EvaluateController(ApplicationService applicationService, EmployeeService employeeService, ApplicationMapper applicationMapper) {
+    public EvaluateController(ApplicationService applicationService, EmployeeService employeeService, ApplicationMapper applicationMapper,
+                              NotificationService notificationService) {
         this.applicationService = applicationService;
         this.employeeService = employeeService;
+        this.notificationService = notificationService;
         this.applicationMapper = applicationMapper;
     }
 
@@ -54,6 +59,15 @@ public class EvaluateController {
 
         applicationService.approveApplication(applicationId, employee, percentageRate);
 
+        Application application = applicationService.getApplicationById(applicationId);
+
+        System.out.println("Получаем пользователя из заявки: " + application.getUser());
+
+        if (application.getUser().getEmail()!=null){
+            notificationService.sendApproveNotification(application, application.getUser());
+        }
+
+
         return ResponseEntity.ok(null);
     }
 
@@ -64,6 +78,14 @@ public class EvaluateController {
         Employee employee = getCurrentEmployee();
 
         applicationService.denyApplication(applicationId, employee, reasonForRefusal);
+
+        Application application = applicationService.getApplicationById(applicationId);
+
+        System.out.println("Получаем пользователя из заявки: " + application.getUser());
+
+        if (application.getUser().getEmail()!=null){
+            notificationService.sendDenyNotification(application, application.getUser());
+        }
 
         return ResponseEntity.ok(null);
     }
@@ -80,4 +102,6 @@ public class EvaluateController {
         return employeeService.findEmployeeByUsername(username);
 
     }
+
+
 }
