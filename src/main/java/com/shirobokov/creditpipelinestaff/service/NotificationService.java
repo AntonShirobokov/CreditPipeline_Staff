@@ -1,13 +1,13 @@
 package com.shirobokov.creditpipelinestaff.service;
 
-
 import com.shirobokov.creditpipelinestaff.entity.Application;
 import com.shirobokov.creditpipelinestaff.entity.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
-
 
 @Service
 public class NotificationService {
@@ -21,7 +21,8 @@ public class NotificationService {
         this.mailSender = mailSender;
     }
 
-    public boolean sendApproveNotification(Application application, User user) {
+    @Async("emailExecutor")
+    public void sendApproveNotification(Application application, User user) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(EMAIL_FROM);
         message.setTo(user.getEmail());
@@ -38,7 +39,6 @@ public class NotificationService {
                 - Цель кредита: %s
                 - Ставка по кредиту: %.2f%%
 
-
                 """,
                 user.getLastName(), user.getFirstName(), user.getMiddleName(),
                 application.getAmount(), application.getPeriod(), application.getPurpose(),
@@ -48,16 +48,14 @@ public class NotificationService {
 
         try {
             mailSender.send(message);
-            System.out.println("Письмо отправлено успешно");
+            System.out.println("Письмо об одобрении отправлено успешно");
         } catch (Exception e) {
-            System.out.println("Ошибка при отправке письма");
-            return false;
+            System.out.println("Ошибка при отправке письма об одобрении: " + e.getMessage());
         }
-
-        return true;
     }
 
-    public boolean sendDenyNotification(Application application, User user) {
+    @Async("emailExecutor")
+    public void sendDenyNotification(Application application, User user) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(EMAIL_FROM);
         message.setTo(user.getEmail());
@@ -84,12 +82,9 @@ public class NotificationService {
 
         try {
             mailSender.send(message);
-            System.out.println("Письмо отправлено успешно");
+            System.out.println("Письмо об отказе отправлено успешно");
         } catch (Exception e) {
-            System.out.println("Ошибка при отправке письма");
-            return false;
+            System.out.println("Ошибка при отправке письма об отказе: " + e.getMessage());
         }
-
-        return true;
     }
 }

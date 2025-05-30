@@ -6,6 +6,57 @@ document.addEventListener("DOMContentLoaded", () => {
     const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute("content");
     const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute("content");
 
+    const fieldSelect = document.getElementById("field");
+    const operationSelect = document.getElementById("operation");
+    const valueContainer = document.getElementById("valueContainer");
+
+    // Поля с 3 операциями
+    const threeOpsFields = ["c_age", "c_income", "c_dept", "c_real_income", "c_number_of_dependents"];
+
+    // Функция обновления доступных операций и поля "значение"
+    function updateFormFields() {
+        const selectedField = fieldSelect.value;
+
+        // Очистить операции
+        operationSelect.innerHTML = "";
+
+        if (threeOpsFields.includes(selectedField)) {
+            // Добавляем 3 операции
+            operationSelect.innerHTML = `
+                <option value="LESS_THAN">Меньше чем</option>
+                <option value="GREATER_THAN">Больше чем</option>
+                <option value="EQUALS">Равно</option>
+            `;
+        } else {
+            // Для остальных только EQUALS
+            operationSelect.innerHTML = `<option value="EQUALS">Равно</option>`;
+        }
+
+        // Обновляем поле для значения
+        if (selectedField === "c_was_bankrupt") {
+            // Заменить содержимое контейнера на select
+            valueContainer.innerHTML = `
+                <select id="value" name="value">
+                    <option value="true">Был банкротом</option>
+                    <option value="false">Не был банкротом</option>
+                </select>
+            `;
+        } else {
+            // Заменить содержимое контейнера на input
+            valueContainer.innerHTML = `
+                <input type="text" id="value" name="value" placeholder="Введите значение" required>
+            `;
+        }
+    }
+
+    // Изначальная инициализация
+    updateFormFields();
+
+    // Слушаем изменение поля выбора поля
+    fieldSelect.addEventListener("change", () => {
+        updateFormFields();
+    });
+
     // Загрузка и отображение правил
     async function loadRules() {
         try {
@@ -96,10 +147,13 @@ document.addEventListener("DOMContentLoaded", () => {
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
 
+        const valueElem = document.getElementById("value");
+        let value = valueElem.value;
+
         const rule = {
-            fieldName: document.getElementById("field").value,
-            operation: document.getElementById("operation").value,
-            value: document.getElementById("value").value,
+            fieldName: fieldSelect.value,
+            operation: operationSelect.value,
+            value: value,
             reason: document.getElementById("reason").value
         };
 
@@ -117,6 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 responseMessage.textContent = "Правило успешно добавлено!";
                 responseMessage.style.color = "green";
                 form.reset();
+                updateFormFields(); // После reset надо восстановить поле value и операции
                 loadRules();
             } else {
                 const errorData = await response.json();
