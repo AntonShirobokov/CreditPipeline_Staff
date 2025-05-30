@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Добавление правил</title>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <link rel="stylesheet" href="/css/rules.css">
+    <script src="/js/rules.js" defer></script>
 </head>
 <body>
 <div class="sidebar">
@@ -11,9 +14,45 @@
     <a href="/rules">Добавление правил</a>
     <a href="/history">История заявок</a>
 </div>
-<div class="main-content">
-    <h2>Добавление правил оценки</h2>
 
+<div class="main-content">
+    <h2>Добавление правил отклонения заявки</h2>
+
+    <form id="ruleForm">
+        <label for="field">Поле:</label>
+        <select id="field" name="field">
+            <option value="c_age">Возраст</option>
+            <option value="c_income">Доход</option>
+            <option value="c_dept">Задолженность</option>
+            <option value="c_real_income">Реальный доход</option>
+            <option value="c_number_of_dependents">Кол-во иждивенцев</option>
+            <option value="c_type_of_employment">Тип занятости</option>
+            <option value="c_was_bankrupt">Банкротство</option>
+            <option value="c_type_of_housing">Тип жилья</option>
+            <option value="c_marital_status">Семейное положение</option>
+            <option value="c_education">Образование</option>
+            <option value="c_deposit">Залог</option>
+        </select>
+
+        <label for="operation">Операция:</label>
+        <select id="operation" name="operation">
+            <option value="LESS_THAN">Меньше чем</option>
+            <option value="GREATER_THAN">Больше чем</option>
+            <option value="EQUALS">Равно</option>
+        </select>
+
+        <label for="value">Значение:</label>
+        <input type="text" id="value" name="value" placeholder="Введите значение" required>
+
+        <label for="reason">Причина отказа:</label>
+        <textarea id="reason" name="reason" rows="3" placeholder="Причина отклонения заявки" required></textarea>
+
+        <button type="submit">Добавить правило</button>
+        <p id="responseMessage"></p>
+    </form>
+
+    <h3>Список текущих правил</h3>
+    <div id="rulesList" class="rules-container"></div>
 </div>
 </body>
 </html>

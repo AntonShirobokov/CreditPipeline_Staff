@@ -8,6 +8,14 @@ create table if not exists t_employee(
     c_role varchar
 );
 
+CREATE TABLE IF NOT EXISTS t_reject_rule (
+    id SERIAL PRIMARY KEY,
+    field_name VARCHAR(64) NOT NULL,
+    operation VARCHAR(32) NOT NULL,
+    value VARCHAR(128) NOT NULL,
+    reason VARCHAR(255) NOT NULL
+);
+
 
 insert into t_employee(c_username, c_password) values ('admin', '{noop}123456');
 

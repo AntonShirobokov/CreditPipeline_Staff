@@ -1,35 +1,131 @@
-@import url('evaluate.css'); /* Можно объединить стили, если хочешь DRY */
+@import url('evaluate.css'); /* Используем общий стиль */
+
+/* Основной контейнер формы */
 form {
     margin-top: 20px;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
     display: flex;
     flex-direction: column;
-    max-width: 400px;
+    gap: 15px;
+    max-width: 500px;
 }
 
+/* Метки */
 label {
-    margin-bottom: 5px;
+    font-weight: 500;
     color: #333;
 }
 
-input {
-    padding: 12px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
+/* Поля ввода и выпадающие списки */
+input[type="text"],
+select,
+textarea {
+    padding: 12px 14px;
     font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: #fefefe;
 }
 
-button {
-    padding: 12px;
-    background: #4facfe;
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #4facfe;
+    box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.2);
+    outline: none;
+}
+
+/* Кнопка */
+button[type="submit"] {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
     color: white;
     font-size: 16px;
+    font-weight: bold;
+    padding: 14px;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: background 0.3s ease, transform 0.2s ease;
 }
 
-button:hover {
-    background: #00c6fb;
+button[type="submit"]:hover {
+    background: linear-gradient(135deg, #00c6fb 0%, #005bea 100%);
+    transform: translateY(-1px);
+}
+
+/* Ответ на отправку формы */
+#responseMessage {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.rules-container {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 600px;
+}
+
+/* Минималистичная карточка правила */
+.rule-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-left: 4px solid #4facfe;
+    border-radius: 10px;
+    padding: 16px 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: background 0.2s ease;
+}
+
+.rule-card:hover {
+    background: #f8fbff;
+}
+
+/* Левая часть: текст правила */
+.rule-info {
+    font-size: 15px;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.rule-info .field {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.rule-info .condition {
+    color: #4facfe;
+}
+
+.rule-info .reason {
+    font-size: 14px;
+    color: #777;
+}
+
+/* Кнопка удаления */
+.delete-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+    background-color: #c0392b;
 }
