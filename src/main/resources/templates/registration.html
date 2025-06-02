@@ -2,34 +2,49 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
+    <title>Регистрация сотрудника</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Регистрация</title>
-    <link rel="stylesheet" href="/css/registration.css"/>
+    <link rel="stylesheet" href="/css/common.css" />
+    <link rel="stylesheet" href="/css/evaluate.css" />
+    <link rel="stylesheet" href="/css/registration.css" />
 </head>
 <body>
-<div class="form-container">
+<!-- Боковое меню -->
+<div class="sidebar">
+    <a href="/statistics">Статистика по кредитам</a>
+    <a href="/rules">Добавление правил</a>
+    <a href="/registration">Регистрация сотрудника</a>
+    <a href="/search">Поиск заявки</a>
+</div>
+
+<!-- Основной контент -->
+<div class="main-content">
     <h2>Регистрация нового сотрудника</h2>
 
-    <div th:if="${alreadyRegistered}" class="error-message">
+    <div th:if="${alreadyRegistered}" class="error-message" style="margin-bottom: 15px; color: red;">
         <p th:text="${alreadyRegistered}"></p>
     </div>
 
-    <form th:action="@{/registration}" th:object="${employee}" method="post" id="registerForm">
-        <div>
-            <input type="email" th:field="*{username}" placeholder="Email" required/>
-            <div th:if="${#fields.hasErrors('username')}" class="error-message">
+    <div th:if="${success}" class="success-message" style="margin-bottom: 15px;">
+        <p th:text="${success}"></p>
+    </div>
+
+    <form th:action="@{/registration}" th:object="${employee}" method="post" id="registerForm" style="max-width: 500px;">
+        <div style="margin-bottom: 15px;">
+            <input type="email" th:field="*{username}" class="input-field" placeholder="Email" required />
+            <div th:if="${#fields.hasErrors('username')}" class="error-message" style="color: red; margin-top: 5px;">
                 <p th:errors="*{username}">Некорректный email</p>
             </div>
         </div>
 
-        <div>
-            <input type="password" th:field="*{password}" placeholder="Пароль" required/>
-            <div th:if="${#fields.hasErrors('password')}" class="error-message">
+        <div style="margin-bottom: 20px;">
+            <input type="password" th:field="*{password}" class="input-field" placeholder="Пароль" required />
+            <div th:if="${#fields.hasErrors('password')}" class="error-message" style="color: red; margin-top: 5px;">
                 <p th:errors="*{password}">Ошибка в пароле</p>
             </div>
         </div>
 
-        <button type="submit">Зарегистрировать</button>
+        <button type="submit" class="details-btn">Зарегистрировать</button>
     </form>
 </div>
 </body>

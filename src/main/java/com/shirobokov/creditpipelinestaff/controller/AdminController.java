@@ -11,4 +11,9 @@ public class AdminController {
     public String statistics() {
         return "statistics";
     }
+
+    @GetMapping("/search")
+    public String search() {
+        return "search";
+    }
 }

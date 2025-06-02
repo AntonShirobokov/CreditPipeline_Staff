@@ -35,7 +35,7 @@ public class RegistrationController {
             model.addAttribute("alreadyRegistered", "Сотрудник уже зарегестрирован");
             return "registration";
         }
-
-        return "redirect:/login";
+        model.addAttribute("success", "Сотрудник успешно зарегестрирован");
+        return "registration";
     }
 }

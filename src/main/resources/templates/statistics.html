@@ -2,8 +2,9 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Оценка заявок</title>
+    <title>Статистика</title>
     <link rel="stylesheet" href="/css/statistics.css">
+    <link rel="stylesheet" href="/css/common.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script defer src="/js/statistics.js"></script>
@@ -13,6 +14,7 @@
     <a href="/statistics">Статистика по кредитам</a>
     <a href="/rules">Добавление правил</a>
     <a href="/registration">Регистрация сотрудника</a>
+    <a href="/search">Поиск</a>
 </div>
 <div class="main-content">
     <h2>Статистика по кредитам</h2>
@@ -27,6 +29,8 @@
         <div class="chart-item"><canvas id="educationChart"></canvas></div>
         <div class="chart-item"><canvas id="purposeChart"></canvas></div>
         <div class="chart-item"><canvas id="statusChart"></canvas></div>
+        <div class="chart-item"><canvas id="ageChart"></canvas></div> <!-- Новый график по возрасту -->
+        <div class="chart-item"><canvas id="incomeEmploymentChart"></canvas></div> <!-- Новый график доходов -->
     </div>
 </div>
 </body>

@@ -27,7 +27,7 @@ public class ApplicationService {
     }
 
     public Application getApplicationById(int id) {
-        return applicationRepository.findById(id).get();
+        return applicationRepository.findById(id).isPresent() ? applicationRepository.findById(id).get() : null;
     }
 
 

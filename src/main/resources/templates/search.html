@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Поиск заявки</title>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/search.css">
+    <script src="/js/search.js" defer></script>
+</head>
+<body>
+<div class="sidebar">
+    <a href="/statistics">Статистика по кредитам</a>
+    <a href="/rules">Добавление правил</a>
+    <a href="/registration">Регистрация сотрудника</a>
+    <a href="/search">Поиск заявки</a>
+</div>
+<div class="main-content">
+    <h2>Просмотр информации по заявке</h2>
+    <label for="applicationId">Введите ID заявки:</label>
+    <input type="number" id="applicationId" class="input-field" placeholder="Например, 1" />
+    <button id="searchBtn" class="details-btn">Найти</button>
+
+    <div id="result" class="card" style="display: none;"></div>
+
+    <!-- Поиск по сотруднику -->
+    <div style="margin-top: 40px;">
+        <label for="employeeUsername"><strong>Поиск по username сотрудника:</strong></label>
+        <input type="text" id="employeeUsername" class="input-field" placeholder="Введите username">
+        <button id="searchEmployeeBtn" class="details-btn">Найти сотрудника</button>
+    </div>
+    <div id="employeeResult"></div>
+</div>
+</body>
+</html>

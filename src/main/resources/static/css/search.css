@@ -1,0 +1,38 @@
+@import url('evaluate.css');
+
+.employee-card {
+    background: #fdfefe;
+    border-left: 6px solid #33c4a3;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    transition: transform 0.2s, background-color 0.3s;
+}
+
+.employee-card:hover {
+    transform: scale(1.01);
+    background-color: #f0f9f6;
+}
+
+.employee-card h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #1a3e36;
+}
+
+.employee-card p {
+    margin: 6px 0;
+    font-size: 15px;
+}
+
+.employee-card ul {
+    list-style: disc;
+    margin-left: 20px;
+    margin-top: 8px;
+}
+
+.employee-card li {
+    font-size: 14px;
+    color: #333;
+}
