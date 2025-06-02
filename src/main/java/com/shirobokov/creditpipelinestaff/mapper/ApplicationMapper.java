@@ -1,6 +1,7 @@
 package com.shirobokov.creditpipelinestaff.mapper;
 
 
+import com.shirobokov.creditpipelinestaff.dto.ApplicationStatisticsDTO;
 import com.shirobokov.creditpipelinestaff.dto.ApplicationViewDTO;
 import com.shirobokov.creditpipelinestaff.entity.Application;
 import org.mapstruct.Mapper;
@@ -12,5 +13,5 @@ public interface ApplicationMapper {
 
     Application applicationViewDTOToApplication(ApplicationViewDTO applicationViewDTO);
 
-
+    ApplicationStatisticsDTO applocationToApplicationStatisticsDTO(Application application);
 }

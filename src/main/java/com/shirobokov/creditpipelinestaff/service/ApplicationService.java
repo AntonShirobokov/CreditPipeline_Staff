@@ -22,6 +22,10 @@ public class ApplicationService {
         return applicationRepository.findByStatus("В рассмотрении");
     }
 
+    public List<Application> getAllApplication() {
+        return applicationRepository.findAll();
+    }
+
     public Application getApplicationById(int id) {
         return applicationRepository.findById(id).get();
     }
