@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
             : "";
 
         resultDiv.innerHTML = `
-            <h3>Заявка №${app.id}</h3>
+            <h3 style="margin-bottom: 20px;">Заявка №${app.id}</h3>
             <p><strong>ФИО:</strong> ${app.user.lastName} ${app.user.firstName} ${app.user.middleName}</p>
             <p><strong>Телефон:</strong> ${app.user.phone}</p>
             <p><strong>Email:</strong> ${app.user.email}</p>
@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const response = await fetch(`/api/statistics/getInfoEmployee?username=${encodeURIComponent(username)}`);
             if (!response.ok) {
                 employeeResultDiv.style.display = "block";
-                employeeResultDiv.innerHTML = "<p>Сотрудник не найден.</p>";
+                employeeResultDiv.innerHTML = "<p style=\"margin-top: 20px;\">Сотрудник не найден.</p>";
                 return;
             }
 
@@ -107,13 +107,14 @@ document.addEventListener("DOMContentLoaded", () => {
     function renderEmployee(data) {
         employeeResultDiv.style.display = "block";
         employeeResultDiv.innerHTML = `
-            <div class="employee-card">
-                <h3>Информация о сотруднике</h3>
-                <p><strong>ID:</strong> ${data.id}</p>
-                <p><strong>Username:</strong> ${data.username}</p>
-                <p><strong>Обработанные заявки (ID):</strong></p>
-                <ul>${data.listApplication.map(id => `<li>Заявка №${id}</li>`).join("")}</ul>
-            </div>
-        `;
+        <div class="employee-card">
+            <h3>Информация о сотруднике</h3>
+            <p><strong>ID:</strong> ${data.id}</p>
+            <p><strong>Username:</strong> ${data.username}</p>
+            <p><strong>ФИО:</strong> ${data.lastName} ${data.firstName} ${data.middleName}</p>
+            <p><strong>Обработанные заявки (ID):</strong></p>
+            <ul>${data.listApplication.map(id => `<li>Заявка №${id}</li>`).join("")}</ul>
+        </div>
+    `;
     }
 });

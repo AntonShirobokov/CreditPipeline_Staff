@@ -30,6 +30,23 @@
     </div>
 
     <form th:action="@{/registration}" th:object="${employee}" method="post" id="registerForm" style="max-width: 500px;">
+
+        <div style="margin-bottom: 15px;">
+            <input th:field="*{lastName}" class="input-field" placeholder="Фамилия" required />
+
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <input th:field="*{firstName}" class="input-field" placeholder="Имя" required />
+
+        </div>
+
+
+        <div style="margin-bottom: 15px;">
+            <input th:field="*{middleName}" class="input-field" placeholder="Отчество" required />
+
+        </div>
+
         <div style="margin-bottom: 15px;">
             <input type="email" th:field="*{username}" class="input-field" placeholder="Email" required />
             <div th:if="${#fields.hasErrors('username')}" class="error-message" style="color: red; margin-top: 5px;">

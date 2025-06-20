@@ -15,6 +15,12 @@ public class EmployeeViewDTO {
 
     private String username;
 
+    private String lastName;
+
+    private String firstName;
+
+    private String middleName;
+
     @Override
     public String toString() {
         return "EmployeeViewDTO{" +

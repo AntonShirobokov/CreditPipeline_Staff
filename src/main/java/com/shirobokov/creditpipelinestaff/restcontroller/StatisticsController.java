@@ -66,6 +66,9 @@ public class StatisticsController {
             Map<String, Object> map = new HashMap<>();
             map.put("id", employee.getId());
             map.put("username", username);
+            map.put("lastName", employee.getLastName());
+            map.put("firstName", employee.getFirstName());
+            map.put("middleName", employee.getMiddleName());
             map.put("listApplication", listApplication);
             return ResponseEntity.ok(map);
         }
